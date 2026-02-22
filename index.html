@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Shaban Owaid | Cybersecurity Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root {
+  --bg:    #050a0f;
+  --bg2:   #080e16;
+  --cyan:  #00e5ff;
+  --green: #00ff88;
+  --red:   #ff2d55;
+  --text:  #c8d8e8;
+  --dim:   #4a6070;
+  --card:  rgba(13,22,34,0.90);
+  --border:rgba(0,229,255,0.15);
+  --glow:  0 0 20px rgba(0,229,255,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg2);}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px;}
+#matrix-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.04;pointer-events:none;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(5,10,15,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:'Orbitron',monospace;font-size:1.05rem;font-weight:700;color:var(--cyan);text-decoration:none;letter-spacing:2px;text-shadow:var(--glow);}
+.nav-links{display:flex;gap:.2rem;list-style:none;}
+.nav-links a{color:var(--dim);text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:1px;padding:.4rem .65rem;border-radius:3px;transition:all .2s;text-transform:uppercase;}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan);background:rgba(0,229,255,.08);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);}
+
+/* ── SHARED ── */
+section{position:relative;z-index:1;padding:6rem 0 5rem;}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem;}
+.section-tag{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--cyan);letter-spacing:4px;text-transform:uppercase;margin-bottom:.5rem;opacity:.7;}
+.section-title{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,4vw,2.5rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1rem;}
+.section-title span{color:var(--cyan);}
+.section-line{width:60px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--green));margin-bottom:3rem;border-radius:2px;}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.6rem;font-family:'Share Tech Mono',monospace;font-size:.82rem;letter-spacing:2px;text-decoration:none;text-transform:uppercase;border-radius:3px;transition:all .3s;border:none;cursor:pointer;}
+.btn-primary{background:var(--cyan);color:#000;font-weight:700;box-shadow:0 0 25px rgba(0,229,255,.35);}
+.btn-primary:hover{background:#fff;transform:translateY(-2px);}
+.btn-outline{border:1px solid var(--cyan);color:var(--cyan);background:transparent;}
+.btn-outline:hover{background:rgba(0,229,255,.1);transform:translateY(-2px);}
+
+/* ════════════════════════
+   COVER
+════════════════════════ */
+#cover{min-height:100vh;display:flex;align-items:center;justify-content:center;padding-top:64px;background:radial-gradient(ellipse at 60% 50%,rgba(0,229,255,.05) 0%,transparent 70%),radial-gradient(ellipse at 20% 80%,rgba(0,255,136,.03) 0%,transparent 60%),var(--bg);}
+.cover-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.75rem;max-width:760px;margin:0 auto;}
+.cover-photo-wrap{position:relative;width:200px;height:200px;flex-shrink:0;}
+.cover-photo-ring{position:absolute;inset:-10px;border-radius:50%;background:conic-gradient(var(--cyan),var(--green),var(--cyan));animation:spin-ring 6s linear infinite;z-index:0;}
+.cover-photo-ring::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--bg);}
+.cover-photo-circle{width:200px;height:200px;border-radius:50%;background:var(--bg2);overflow:hidden;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;}
+.cover-photo-circle img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+@keyframes spin-ring{to{transform:rotate(360deg);}}
+.cover-name{font-family:'Orbitron',monospace;font-size:clamp(2rem,6vw,3.6rem);font-weight:900;color:#fff;line-height:1.1;}
+.cover-name span{color:var(--cyan);text-shadow:0 0 30px rgba(0,229,255,.5);}
+.cover-title-line{font-family:'Share Tech Mono',monospace;font-size:.95rem;color:var(--green);letter-spacing:3px;}
+.cover-title-line::after{content:'|';color:var(--cyan);animation:blink .8s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+.cover-desc{color:#6a8898;font-size:1rem;line-height:1.9;}
+.cover-desc strong{color:var(--cyan);}
+.cover-tags{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;}
+.cover-tag{background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.18);color:#5a8898;padding:.3rem .8rem;border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.5px;}
+.cover-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.cover-stats{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;padding-top:1.5rem;border-top:1px solid var(--border);}
+.cstat{text-align:center;}
+.cstat-num{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:900;color:var(--cyan);display:block;text-shadow:var(--glow);}
+.cstat-lbl{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:.3rem;color:var(--dim);font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:2px;text-decoration:none;animation:bob 2s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+.scroll-hint span{color:var(--cyan);font-size:1rem;}
+
+/* ════════════════════════
+   HOME
+════════════════════════ */
+#home{background:var(--bg2);border-top:1px solid var(--border);}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.home-eyebrow{font-family:'Share Tech Mono',monospace;font-size:.78rem;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:1rem;}
+.home-eyebrow::before{content:'';display:inline-block;width:40px;height:1px;background:var(--cyan);}
+.home-name{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:.75rem;}
+.home-name .hl{color:var(--cyan);text-shadow:0 0 30px rgba(0,229,255,.5);}
+.home-sub{font-family:'Share Tech Mono',monospace;font-size:.9rem;color:var(--green);letter-spacing:2px;margin-bottom:1.5rem;}
+.home-desc{color:#6a8898;font-size:1rem;line-height:1.8;margin-bottom:2.5rem;max-width:480px;}
+.home-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+.stats-bar{display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);}
+.stat-num{font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--cyan);display:block;}
+.stat-lbl{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
+.home-visual{display:flex;justify-content:center;align-items:center;}
+.hex-container{position:relative;width:300px;height:300px;display:flex;justify-content:center;align-items:center;}
+.hex-ring{position:absolute;border:1px solid;border-radius:50%;animation:spinR linear infinite;}
+.hr1{width:270px;height:270px;border-color:rgba(0,229,255,.2);animation-duration:20s;}
+.hr2{width:210px;height:210px;border-color:rgba(0,255,136,.15);animation-duration:15s;animation-direction:reverse;border-style:dashed;}
+.hr3{width:150px;height:150px;border-color:rgba(0,229,255,.3);animation-duration:10s;}
+@keyframes spinR{to{transform:rotate(360deg);}}
+.hex-core{width:90px;height:90px;background:linear-gradient(135deg,rgba(0,229,255,.2),rgba(0,255,136,.1));border:2px solid var(--cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;box-shadow:0 0 40px rgba(0,229,255,.2),inset 0 0 20px rgba(0,229,255,.1);position:relative;z-index:2;}
+.orb{position:absolute;width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px var(--cyan);top:50%;left:0;transform-origin:135px 0;animation:orbit 8s linear infinite;}
+.orb2{background:var(--green);box-shadow:0 0 10px var(--green);transform-origin:105px 0;animation-duration:5s;animation-direction:reverse;}
+@keyframes orbit{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* ════════════════════════
+   ABOUT — SERVICE CARDS (FIXED EXPAND)
+════════════════════════ */
+#about{background:var(--bg);}
+.about-bio{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--cyan);padding:2rem;border-radius:4px;margin-bottom:2.5rem;font-size:.98rem;color:#7a99b0;line-height:1.9;}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem;}
+
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.75rem;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s;}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--cyan),var(--green));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.service-card:hover::before{transform:scaleX(1);}
+.service-card:hover{border-color:rgba(0,229,255,.4);box-shadow:0 8px 30px rgba(0,0,0,.4),var(--glow);}
+.svc-icon{font-size:1.8rem;margin-bottom:1rem;display:block;}
+.svc-title{font-family:'Orbitron',monospace;font-size:.86rem;color:var(--cyan);letter-spacing:1px;margin-bottom:.6rem;font-weight:700;}
+.svc-short{font-size:.9rem;color:#5a7585;line-height:1.7;}
+
+/* THE FIX: detail is hidden by default, shown when card has .open */
+.svc-detail{
+  font-size:.87rem;color:#4e6a7a;line-height:1.75;
+  max-height:0;overflow:hidden;
+  transition:max-height .5s ease, padding-top .3s ease;
+  padding-top:0;
+}
+.service-card.open .svc-detail{
+  max-height:600px;
+  padding-top:.9rem;
+}
+
+/* THE FIX: button is a real <button> with no pointer-events conflict */
+.expand-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:1rem;
+  font-family:'Share Tech Mono',monospace;font-size:.73rem;letter-spacing:1px;
+  color:var(--cyan);background:rgba(0,229,255,.07);
+  border:1px solid rgba(0,229,255,.2);
+  padding:.35rem .75rem;border-radius:2px;
+  cursor:pointer;transition:all .2s;
+  position:relative;z-index:10; /* above card hover layer */
+}
+.expand-btn:hover{background:rgba(0,229,255,.18);border-color:var(--cyan);}
+.expand-btn .arr{display:inline-block;transition:transform .35s ease;line-height:1;}
+.service-card.open .expand-btn .arr{transform:rotate(180deg);}
+
+/* ════════════════════════
+   EDUCATION
+════════════════════════ */
+#education{background:var(--bg2);}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:2rem;display:flex;gap:2rem;align-items:flex-start;transition:all .3s;max-width:680px;}
+.edu-card:hover{border-color:rgba(0,229,255,.4);box-shadow:var(--glow);}
+.edu-icon{width:60px;height:60px;flex-shrink:0;background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+.edu-degree{font-family:'Orbitron',monospace;font-size:.93rem;font-weight:700;color:#fff;margin-bottom:.4rem;}
+.edu-school{font-size:1rem;color:var(--cyan);margin-bottom:.3rem;}
+.edu-meta{font-family:'Share Tech Mono',monospace;font-size:.78rem;color:var(--dim);display:flex;gap:1.5rem;flex-wrap:wrap;}
+
+/* ════════════════════════
+   SKILLS
+════════════════════════ */
+#skills{background:var(--bg);}
+.skills-intro{font-size:.98rem;color:#6a8898;margin-bottom:2.5rem;max-width:700px;line-height:1.8;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.5rem;transition:all .3s;}
+.skill-card:hover{border-color:rgba(0,229,255,.35);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3);}
+.skill-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;}
+.skill-icon-box{width:36px;height:36px;background:rgba(0,229,255,.1);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.skill-name{font-family:'Orbitron',monospace;font-size:.76rem;font-weight:700;color:var(--cyan);letter-spacing:.5px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.skill-tag{background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.12);color:#6a8898;padding:.25rem .65rem;border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.5px;}
+
+/* ════════════════════════
+   EXPERIENCE
+════════════════════════ */
+#experience{background:var(--bg2);}
+.timeline{position:relative;padding-left:2.5rem;}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--cyan),rgba(0,229,255,.05));}
+.timeline-item{position:relative;margin-bottom:2.5rem;padding-left:1.5rem;}
+.tl-dot{position:absolute;left:-2.5rem;top:8px;width:16px;height:16px;background:var(--bg2);border:2px solid var(--cyan);border-radius:50%;box-shadow:0 0 10px rgba(0,229,255,.4);z-index:2;}
+.tl-dot.g{border-color:var(--green);box-shadow:0 0 10px rgba(0,255,136,.4);}
+.tl-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.75rem;transition:all .3s;}
+.tl-card:hover{border-color:rgba(0,229,255,.35);box-shadow:var(--glow);transform:translateX(4px);}
+.tl-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:.5rem;}
+.job-title{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:700;color:#fff;letter-spacing:.5px;}
+.job-co{font-size:.95rem;color:var(--cyan);margin-bottom:.25rem;}
+.job-dates{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--dim);background:rgba(0,229,255,.06);padding:.2rem .6rem;border-radius:2px;border:1px solid rgba(0,229,255,.12);white-space:nowrap;}
+.job-badge{display:inline-block;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:.7rem;padding:.2rem .6rem;border-radius:2px;margin-bottom:1rem;letter-spacing:1px;}
+.job-pts{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.job-pts li{font-size:.9rem;color:#5a7585;padding-left:1.2rem;position:relative;line-height:1.6;}
+.job-pts li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:.7rem;top:3px;}
+
+/* ════════════════════════
+   PROJECTS
+════════════════════════ */
+#projects{background:var(--bg);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1.75rem;}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;}
+.project-card:hover{border-color:rgba(0,229,255,.4);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.5),var(--glow);}
+.proj-img-area{position:relative;width:100%;height:180px;background:linear-gradient(135deg,rgba(0,229,255,.05),rgba(0,255,136,.03));border-bottom:1px solid var(--border);overflow:hidden;}
+.proj-img-area img{width:100%;height:100%;object-fit:cover;display:block;}
+.proj-body{padding:1.5rem;display:flex;flex-direction:column;flex:1;gap:.7rem;}
+.proj-num{font-family:'Orbitron',monospace;font-size:.68rem;color:var(--dim);letter-spacing:2px;}
+.proj-title{font-family:'Orbitron',monospace;font-size:.9rem;font-weight:700;color:#fff;letter-spacing:.5px;}
+.proj-desc{font-size:.88rem;color:#5a7585;line-height:1.7;flex:1;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;}
+.proj-tag{background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.15);color:var(--green);padding:.2rem .55rem;border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:.67rem;}
+.proj-links{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.3rem;}
+.plink{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .75rem;border-radius:3px;font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.5px;text-decoration:none;transition:all .2s;border:1px solid rgba(0,229,255,.2);color:var(--cyan);background:rgba(0,229,255,.06);}
+.plink:hover{background:rgba(0,229,255,.15);border-color:var(--cyan);}
+.plink.ln{border-color:rgba(10,154,215,.4);color:#0a9ad7;background:rgba(10,154,215,.07);}
+.plink.ln:hover{background:rgba(10,154,215,.15);}
+.plink.dr{border-color:rgba(0,255,136,.25);color:var(--green);background:rgba(0,255,136,.06);}
+.plink.dr:hover{background:rgba(0,255,136,.15);}
+
+/* ════════════════════════
+   CERTIFICATES
+════════════════════════ */
+#certificates{background:var(--bg2);}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;}
+.cert-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.3rem 1.5rem;display:flex;align-items:center;gap:1rem;transition:all .3s;}
+.cert-card:hover{border-color:rgba(0,229,255,.4);transform:translateY(-3px);box-shadow:var(--glow);}
+.cert-badge{width:44px;height:44px;flex-shrink:0;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.cert-info{flex:1;}
+.cert-name{font-family:'Orbitron',monospace;font-size:.76rem;font-weight:700;color:#dce8f0;letter-spacing:.3px;line-height:1.4;}
+.cert-view{display:inline-flex;align-items:center;gap:.3rem;margin-top:.5rem;font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--cyan);background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);padding:.2rem .55rem;border-radius:2px;text-decoration:none;transition:all .2s;letter-spacing:.5px;}
+.cert-view:hover{background:rgba(0,229,255,.15);border-color:var(--cyan);}
+.totals-bar{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:2.5rem;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:2rem;justify-content:space-around;}
+.total-item{text-align:center;}
+.total-num{font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;color:var(--cyan);display:block;text-shadow:var(--glow);}
+.total-lbl{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
+
+/* ════════════════════════
+   CONTACT
+════════════════════════ */
+#contact{background:var(--bg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.contact-headline{font-size:1rem;color:#6a8898;line-height:1.8;margin-bottom:2rem;}
+.contact-items{display:flex;flex-direction:column;gap:1rem;}
+.contact-item{display:flex;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1rem 1.25rem;transition:all .3s;text-decoration:none;color:inherit;}
+.contact-item:hover{border-color:rgba(0,229,255,.4);transform:translateX(6px);box-shadow:var(--glow);}
+.ci-icon{width:40px;height:40px;flex-shrink:0;background:rgba(0,229,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.ci-lbl{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:.1rem;}
+.ci-val{font-size:.95rem;color:var(--text);}
+.contact-form{display:flex;flex-direction:column;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.4rem;}
+.form-lbl{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
+.form-inp,.form-ta{background:var(--card);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:1rem;padding:.75rem 1rem;transition:border-color .2s;resize:none;outline:none;}
+.form-inp:focus,.form-ta:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,229,255,.1);}
+.form-ta{min-height:130px;}
+/* form status message */
+.form-status{
+  display:none;margin-top:.5rem;
+  font-family:'Share Tech Mono',monospace;font-size:.78rem;
+  padding:.75rem 1rem;border-radius:4px;line-height:1.5;
+}
+.form-status.success{display:block;background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.3);color:var(--green);}
+.form-status.error{display:block;background:rgba(255,45,85,.1);border:1px solid rgba(255,45,85,.3);color:#ff6b8a;}
+.form-status.info{display:block;background:rgba(0,229,255,.08);border:1px solid rgba(0,229,255,.2);color:var(--cyan);}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:2rem;text-align:center;position:relative;z-index:1;}
+.footer-text{font-family:'Share Tech Mono',monospace;font-size:.76rem;color:var(--dim);letter-spacing:1px;}
+.footer-text span{color:var(--cyan);}
+
+/* ── GLITCH ── */
+.glitch{position:relative;}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;font-family:inherit;font-size:inherit;font-weight:inherit;pointer-events:none;}
+.glitch::before{color:var(--cyan);animation:g1 4s infinite;clip-path:polygon(0 0,100% 0,100% 35%,0 35%);}
+.glitch::after{color:var(--red);animation:g2 4s infinite;clip-path:polygon(0 65%,100% 65%,100% 100%,0 100%);}
+@keyframes g1{0%,90%,100%{transform:none;opacity:0;}92%{transform:translateX(-4px);opacity:.7;}94%{transform:translateX(4px);opacity:.7;}98%{transform:none;opacity:0;}}
+@keyframes g2{0%,90%,100%{transform:none;opacity:0;}93%{transform:translateX(4px);opacity:.5;}95%{transform:translateX(-4px);opacity:.5;}99%{transform:none;opacity:0;}}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(5,10,15,.98);padding:1.5rem;gap:.5rem;border-bottom:1px solid var(--border);}
+  .home-grid{grid-template-columns:1fr;}
+  .home-visual{display:none;}
+  .contact-grid{grid-template-columns:1fr;}
+  .cover-stats{gap:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="matrix-bg"></canvas>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <a href="#cover" class="nav-logo">ASO</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#cover">Cover</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ══════════════════════════════════
+     COVER
+══════════════════════════════════ -->
+<section id="cover">
+  <div class="container">
+    <div class="cover-inner">
+      <div class="cover-photo-wrap">
+        <div class="cover-photo-ring"></div>
+        <div class="cover-photo-circle">
+          <img src="personal.PNG" alt="Ahmed Shaban Owaid">
+        </div>
+      </div>
+      <h1 class="cover-name glitch" data-text="Ahmed Shaban Owaid">Ahmed <span>Shaban Owaid</span></h1>
+      <div class="cover-title-line">Experienced Cybersecurity Professional</div>
+      <p class="cover-desc">
+        Cybersecurity specialist from Egypt, combining <strong>blue team defense</strong> and
+        <strong style="color:var(--green)">red team offense</strong> expertise.
+        Specializing in SOC operations, threat detection, incident response, malware analysis,
+        and digital forensics — with 1,000+ hours of hands-on training.
+      </p>
+      <div class="cover-tags">
+        <span class="cover-tag">SOC Operations</span>
+        <span class="cover-tag">Malware Analysis</span>
+        <span class="cover-tag">Digital Forensics</span>
+        <span class="cover-tag">Threat Detection</span>
+        <span class="cover-tag">Incident Response</span>
+        <span class="cover-tag">Blue Team</span>
+        <span class="cover-tag">Web Application Penetration Testing</span>
+      </div>
+      <div class="cover-btns">
+        <a href="#about" class="btn btn-primary">⚡ Explore My Work</a>
+        <a href="#contact" class="btn btn-outline">✉ Hire Me</a>
+      </div>
+      <div class="cover-stats">
+        <div class="cstat"><span class="cstat-num">1000+</span><span class="cstat-lbl">Hours Training</span></div>
+        <div class="cstat"><span class="cstat-num">200+</span><span class="cstat-lbl">Labs Completed</span></div>
+        <div class="cstat"><span class="cstat-num">2×</span><span class="cstat-lbl">Top of Class</span></div>
+        <div class="cstat"><span class="cstat-num">11</span><span class="cstat-lbl">Certificates</span></div>
+      </div>
+      <a href="#about" class="scroll-hint">SCROLL DOWN<span>▼</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ABOUT
+══════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="section-tag"></div>
+    <h2 class="section-title">Who I <span>Am</span></h2>
+    <div class="section-line"></div>
+    <div class="about-bio">
+      I'm Ahmed Shaban Owaid, an experienced cybersecurity professional from Egypt, specializing in SOC operations, threat detection, and incident response. With over 1,000 hours of hands-on training in advanced malware analysis, digital forensics, and both blue team defense (proactive threat hunting and system hardening) and red team offense (penetration testing and vulnerability exploitation), I deliver comprehensive security solutions. What sets me apart is my dual expertise in blue team strategies using SIEM platforms (Splunk, QRadar, Wazuh, FortiSIEM) and red team tactics for offensive simulations — enabling me to anticipate and neutralize threats effectively, as demonstrated in my top-of-class achievements in Kayfa SOC Analyst and NTI FortiGate Firewall programs. I excel in building secure environments, from designing full-scale homelabs to delivering court-ready forensic reports.
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="svc-icon">🔍</span>
+        <div class="svc-title">SOC Operations &amp; Threat Detection</div>
+        <div class="svc-short">Real-time threat monitoring, custom dashboard creation, and alert triage across multiple SIEM platforms.</div>
+        <div class="svc-detail">Leverage expertise in blue team, security operations, and incident handling to provide seamless integration of detection-as-code, NIST-aligned controls, and detailed incident response reporting across IBM QRadar, Splunk, Wazuh, and FortiSIEM — minimizing downtime and enhancing your security posture. Contact me today to optimize your SOC and strengthen threat detection capabilities.</div>
+        <button class="expand-btn" onclick="toggleSvc(this)"><span class="btn-txt">EXPAND</span><span class="arr">▾</span></button>
+      </div>
+
+      <div class="service-card">
+        <span class="svc-icon">🔬</span>
+        <div class="svc-title">Digital Forensics &amp; Incident Response</div>
+        <div class="svc-short">Court-admissible investigations on Windows, Linux, and macOS with full chain-of-custody documentation.</div>
+        <div class="svc-detail">Thorough evidence acquisition, preservation, and anti-forensics countermeasures delivering structured reports that support legal proceedings and rapid recovery. Trust my forensic integrity to turn breaches into actionable insights. Reach out now to secure expert forensic support for your incident response needs.</div>
+        <button class="expand-btn" onclick="toggleSvc(this)"><span class="btn-txt">EXPAND</span><span class="arr">▾</span></button>
+      </div>
+
+      <div class="service-card">
+        <span class="svc-icon">🦠</span>
+        <div class="svc-title">Advanced Malware Analysis</div>
+        <div class="svc-short">Static and dynamic malware investigations using sandbox environments and behavioral analysis techniques.</div>
+        <div class="svc-detail">Deep investigation uncovering payload mechanisms, persistence methods, evasion tactics, and C2 communications using sandbox environments, hashing tools, network/registry monitoring, and behavioral analysis techniques honed through Mahara-Tech training. Comprehensive reports empower SOC and IR teams to neutralize sophisticated threats.</div>
+        <button class="expand-btn" onclick="toggleSvc(this)"><span class="btn-txt">EXPAND</span><span class="arr">▾</span></button>
+      </div>
+
+      <div class="service-card">
+        <span class="svc-icon">⚔️</span>
+        <div class="svc-title">Penetration Testing &amp; Vulnerability Assessment</div>
+        <div class="svc-short">Targeted red team offensives — web app testing, network reconnaissance, and Active Directory attacks.</div>
+        <div class="svc-detail">Manual web application testing against OWASP Top 10 (authentication bypasses, logic flaws), network recon, and AD penetration with privilege escalation and credential attacks. eJPT-backed skills combined with custom Python/Bash scripting yield professional reports with business impacts and remediation strategies.</div>
+        <button class="expand-btn" onclick="toggleSvc(this)"><span class="btn-txt">EXPAND</span><span class="arr">▾</span></button>
+      </div>
+
+      <div class="service-card">
+        <span class="svc-icon">🏗️</span>
+        <div class="svc-title">Homelab Design &amp; Training</div>
+        <div class="svc-short">Bespoke enterprise simulations with OPNsense, Active Directory, TheHive, Cortex, MISP, and Velociraptor.</div>
+        <div class="svc-detail">Build enterprise-grade simulations with VLAN segmentation, DNS/DHCP, TheHive for case management, Cortex for automated analysis, MISP for threat intelligence sharing, and Velociraptor for endpoint forensics — offering dual blue/red team training to upskill your staff and test defenses in a controlled, realistic environment.</div>
+        <button class="expand-btn" onclick="toggleSvc(this)"><span class="btn-txt">EXPAND</span><span class="arr">▾</span></button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     EDUCATION
+══════════════════════════════════ -->
+<section id="education">
+  <div class="container">
+    <div class="section-tag"></div>
+    <h2 class="section-title">Academic <span>Background</span></h2>
+    <div class="section-line"></div>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor of Science in Electronics and Communication Engineering</div>
+        <div class="edu-school">Beni-Suef University</div>
+        <div class="edu-meta"><span>📍 Egypt</span><span>📅 2021 – 2026</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SKILLS
+══════════════════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-tag">// 03 Skills</div>
+    <h2 class="section-title">Technical <span>Arsenal</span></h2>
+    <div class="section-line"></div>
+    <p class="skills-intro">With a blend of technical prowess and analytical mindset, I deliver value through rapid threat mitigation and enhanced security postures. Key skills include:</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-header"><div class="skill-icon-box">🦠</div><div class="skill-name">Advanced Malware Analysis</div></div>
+        <div class="skill-tags"><span class="skill-tag">Static Analysis</span><span class="skill-tag">Behavioral/Dynamic</span><span class="skill-tag">Sandbox Environments</span><span class="skill-tag">Reverse Engineering</span><span class="skill-tag">C2 Identification</span><span class="skill-tag">Evasion Techniques</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header"><div class="skill-icon-box">🔬</div><div class="skill-name">Digital Forensics</div></div>
+        <div class="skill-tags"><span class="skill-tag">Windows/Linux/macOS</span><span class="skill-tag">Evidence Acquisition</span><span class="skill-tag">Chain-of-Custody</span><span class="skill-tag">Anti-Forensics</span><span class="skill-tag">Forensic Imaging</span><span class="skill-tag">Court-Ready Reports</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header"><div class="skill-icon-box">🛡</div><div class="skill-name">Blue Team Defense</div></div>
+        <div class="skill-tags"><span class="skill-tag">Splunk</span><span class="skill-tag">IBM QRadar</span><span class="skill-tag">Wazuh</span><span class="skill-tag">FortiSIEM</span><span class="skill-tag">Incident Response</span><span class="skill-tag">NIST 800-53</span><span class="skill-tag">Cyber Kill Chain</span><span class="skill-tag">Threat Hunting</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header"><div class="skill-icon-box">⚔️</div><div class="skill-name">Red Team Offense</div></div>
+        <div class="skill-tags"><span class="skill-tag">Penetration Testing</span><span class="skill-tag">OWASP Top 10</span><span class="skill-tag">Python/Bash</span><span class="skill-tag">PowerShell</span><span class="skill-tag">Privilege Escalation</span><span class="skill-tag">AD Attacks</span><span class="skill-tag">eJPT</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header"><div class="skill-icon-box">🌐</div><div class="skill-name">Networking &amp; Firewalls</div></div>
+        <div class="skill-tags"><span class="skill-tag">FortiGate IPS/VPN/SD-WAN</span><span class="skill-tag">CCNA Level</span><span class="skill-tag">Wireshark</span><span class="skill-tag">OPNsense</span><span class="skill-tag">Packet Analysis</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-header"><div class="skill-icon-box">🏗️</div><div class="skill-name">Lab Simulation &amp; Automation</div></div>
+        <div class="skill-tags"><span class="skill-tag">Active Directory</span><span class="skill-tag">DNS/DHCP</span><span class="skill-tag">TheHive</span><span class="skill-tag">Cortex</span><span class="skill-tag">MISP</span><span class="skill-tag">Velociraptor</span><span class="skill-tag">Detection as Code</span><span class="skill-tag">DVWA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════ -->
+<section id="experience">
+  <div class="container">
+    <div class="section-tag"></div>
+    <h2 class="section-title">Professional <span>Timeline</span></h2>
+    <div class="section-line"></div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div><div class="job-title">Digital Forensics Investigator</div><div class="job-co">DEPI</div></div>
+            <div class="job-dates">Nov 2025 – Jul 2026</div>
+          </div>
+          <div class="job-badge">INTERNSHIP</div>
+          <ul class="job-pts">
+            <li>Full-cycle digital forensics investigations on Windows, Linux, and macOS — evidence acquisition, preservation, chain-of-custody, analysis, and court-ready reporting.</li>
+            <li>Forensic imaging and analysis of file systems, disk artifacts, network traffic, malware, databases, web apps, and email evidence.</li>
+            <li>Applied anti-forensics countermeasures and maintained strict forensic integrity to ensure legal admissibility.</li>
+            <li>Completed real-world capstone project delivering structured forensic reports and findings.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot g"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div><div class="job-title">Penetration Testing</div><div class="job-co">IPP INC — Cairo, Egypt</div></div>
+            <div class="job-dates">Aug 2025 – Sep 2025</div>
+          </div>
+          <div class="job-badge">INTERNSHIP</div>
+          <ul class="job-pts">
+            <li>In-depth network reconnaissance, traffic analysis, and manual vulnerability discovery across Linux and Windows environments.</li>
+            <li>Hands-on web application security testing targeting OWASP Top 10, authentication logic, and custom attack vectors.</li>
+            <li>Privilege escalation and credential attacks using manual methods and controlled exploitation.</li>
+            <li>Developed Python and Bash scripts to automate repetitive tasks and support custom testing scenarios.</li>
+            <li>Produced professional penetration testing reports with findings, business impact, and remediation recommendations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div><div class="job-title">Fortinet FortiGate Firewall</div><div class="job-co">NTI &amp; ITIDA</div></div>
+            <div class="job-dates">Jun 2025 – Jul 2025</div>
+          </div>
+          <div class="job-badge">🏆 TOP OF CLASS — 100% SCORE</div>
+          <ul class="job-pts">
+            <li>Configured FortiGate firewalls, security policies, IPS, web filtering, and user authentication.</li>
+            <li>Implemented SSL/IPSec VPNs and SD-WAN configurations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot g"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div><div class="job-title">Defensive Security Operations</div><div class="job-co">CyberMillion Program</div></div>
+            <div class="job-dates">May 2025 – Jul 2025</div>
+          </div>
+          <div class="job-badge">159 LABS · 11,450 PTS · 43 CPE CREDITS</div>
+          <ul class="job-pts">
+            <li>Completed 159 cybersecurity labs totaling 43 hours of hands-on training, earning 11,450 points.</li>
+            <li>Built Splunk dashboards/queries, performed incident response (phishing, exfiltration), Linux CLI, and Wireshark traffic analysis.</li>
+            <li>Applied NIST 800-53, Cyber Kill Chain, and OWASP Top 10 frameworks.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <div><div class="job-title">SOC Professional Analyst</div><div class="job-co">Kayfa</div></div>
+            <div class="job-dates">Jun 2024 – Dec 2024</div>
+          </div>
+          <div class="job-badge">🏆 TOP OF CLASS — 350 HOURS</div>
+          <ul class="job-pts">
+            <li>Monitored and analyzed security events using Splunk and IBM QRadar SIEM.</li>
+            <li>Configured Microsoft Active Directory, hardened Linux systems, and supported SOC incident response.</li>
+            <li>Studied real-world Splunk case studies and applied DFIR techniques.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PROJECTS
+══════════════════════════════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-tag"></div>
+    <h2 class="section-title">Featured <span>Work</span></h2>
+    <div class="section-line"></div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="proj-img-area">
+          <img src="project1.png" alt="Enterprise Homelab Simulation">
+        </div>
+        <div class="proj-body">
+          <div class="proj-num">PROJECT 01</div>
+          <div class="proj-title">Enterprise Homelab Simulation</div>
+          <p class="proj-desc">Designed and operated a full-scale security lab with VLAN segmentation, Active Directory (DNS/DHCP), OPNsense firewall, DVWA, MailHog, TheHive, Cortex, MISP, and Velociraptor. Integrated QRadar SIEM with custom detection rules — 1,000+ hours invested.</p>
+          <div class="proj-tags"><span class="proj-tag">Active Directory</span><span class="proj-tag">QRadar SIEM</span><span class="proj-tag">OPNsense</span><span class="proj-tag">TheHive</span><span class="proj-tag">MISP</span><span class="proj-tag">Velociraptor</span></div>
+          <div class="proj-links">
+            <a href="https://www.linkedin.com/posts/ahmedshowaid_cybersecurity-blueteam-detectionengineering-activity-7374351490792095744-SlTb?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADjfc74Br8P8-AnA8Yd_2KMj1zm7IPsc-a0" target="_blank" class="plink ln">▶ LinkedIn Video</a>
+            <a href="YOUR_DRIVE_LINK" target="_blank" class="plink dr">📄 Drive / PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-img-area">
+          <img src="project2.png" alt="Incident Response Reports">
+        </div>
+        <div class="proj-body">
+          <div class="proj-num">PROJECT 02</div>
+          <div class="proj-title">Incident Response Reports</div>
+          <p class="proj-desc">Investigated lateral movement and persistence in a simulated attack. Used packet captures, log correlation, and Wireshark to map TTPs — improving detection by 40% in lab metrics. Delivered structured reports with actionable findings.</p>
+          <div class="proj-tags"><span class="proj-tag">Wireshark</span><span class="proj-tag">Log Correlation</span><span class="proj-tag">DFIR</span><span class="proj-tag">TTP Mapping</span><span class="proj-tag">+40% Detection</span></div>
+          <div class="proj-links">
+            <a href="https://drive.google.com/file/d/1vZ0ISfcJIAtg8TDTMoICuw9zAaEXo7fC/view?usp=sharing" target="_blank" class="plink dr">📄 Report 1</a>
+            <a href="https://drive.google.com/file/d/1pp7YuSCD-_yXqO_Uga_U8wd7CTDd2mH9/view?usp=sharing" target="_blank" class="plink dr">📄 Report 2</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-img-area">
+          <img src="YOUR_PROJECT3_IMAGE_PATH" alt="Advanced Malware Analysis">
+        </div>
+        <div class="proj-body">
+          <div class="proj-num">PROJECT 03</div>
+          <div class="proj-title">Advanced Malware Analysis</div>
+          <p class="proj-desc">Conducted static and dynamic analysis on real-world malware samples, producing comprehensive reports that supported SOC teams in mitigation strategies. Uncovered payload mechanisms, persistence methods, and C2 communications.</p>
+          <div class="proj-tags"><span class="proj-tag">Static Analysis</span><span class="proj-tag">Dynamic Analysis</span><span class="proj-tag">Sandbox</span><span class="proj-tag">IOC Extraction</span><span class="proj-tag">C2 Analysis</span></div>
+          <div class="proj-links">
+            <a href="YOUR_DRIVE_LINK" target="_blank" class="plink dr">📄 View Report</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CERTIFICATES
+══════════════════════════════════ -->
+<section id="certificates">
+  <div class="container">
+    <div class="section-tag"></div>
+    <h2 class="section-title">Certifications &amp; <span>Achievements</span></h2>
+    <div class="section-line"></div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-badge">🛡</div>
+        <div class="cert-info">
+          <div class="cert-name">FCP — FortiGate 7.4 Administration</div>
+          <a href="https://drive.google.com/file/d/1ps4hQrFlkRyfvX0-NV1hLA94fQbKk8tZ/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🦠</div>
+        <div class="cert-info">
+          <div class="cert-name">Malware Analysis Fundamentals</div>
+          <a href="https://drive.google.com/file/d/1AxSYwdGhsBOoIbp0PvBF7S3Izr54X9p1/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">📊</div>
+        <div class="cert-info">
+          <div class="cert-name">Splunk SIEM Case Studies</div>
+          <a href="https://drive.google.com/file/d/14JK4_46FG8Y1M_du04GTaAtc6rAm0eFo/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🔍</div>
+        <div class="cert-info">
+          <div class="cert-name">QRadar Professional Pathway</div>
+          <a href="https://drive.google.com/file/d/1viyweAIM9peTBO0-3Z0XGSdzVCG2JEft/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🖥</div>
+        <div class="cert-info">
+          <div class="cert-name">SOC Monitoring Using Splunk SIEM</div>
+          <a href="https://drive.google.com/file/d/1MrGHc5DnGONmfIddhhxHB0hipUAoO64O/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🔐</div>
+        <div class="cert-info">
+          <div class="cert-name">Introduction to SOC Analysis and Management</div>
+          <a href="https://drive.google.com/file/d/1og8NdRsdNRUy6Ardkm3Eavv_IpKvdaP9/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🐧</div>
+        <div class="cert-info">
+          <div class="cert-name">Linux Fundamentals</div>
+          <a href="https://drive.google.com/file/d/1uFayujKcieSbC0dF8Os2xPbyNyB4jYjc/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🗂</div>
+        <div class="cert-info">
+          <div class="cert-name">Microsoft Windows Active Directory</div>
+          <a href="https://drive.google.com/file/d/1MBwHIOwDlaEsQJq9ptZxlLRkHtyanGkG/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">🌐</div>
+        <div class="cert-info">
+          <div class="cert-name">Network and Security Fundamentals</div>
+          <a href="https://drive.google.com/file/d/14KybjNCPDy2prFL0ngIAfhEhauFqIQJN/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">💻</div>
+        <div class="cert-info">
+          <div class="cert-name">The Principles of Writing Clean Code</div>
+          <a href="https://drive.google.com/file/d/1u5I_tmqoBVynZ4-V7K1YkajTSCaJq9wU/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge">📡</div>
+        <div class="cert-info">
+          <div class="cert-name">Computer Network Fundamentals</div>
+          <a href="https://drive.google.com/file/d/1xbyPc4exmtRMKQsHV2u6gyi5gbiYkrWT/view?usp=sharing" target="_blank" class="cert-view">📎 View Certificate</a>
+        </div>
+      </div>
+    </div>
+    <div class="totals-bar">
+      <div class="total-item"><span class="total-num">11</span><span class="total-lbl">Certificates</span></div>
+      <div class="total-item"><span class="total-num">1000+</span><span class="total-lbl">Training Hours</span></div>
+      <div class="total-item"><span class="total-num">2×</span><span class="total-lbl">Top of Class</span></div>
+      <div class="total-item"><span class="total-num">200+</span><span class="total-lbl">Labs Done</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CONTACT
+══════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-tag"></div>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-headline">Ready to elevate your cybersecurity defenses? Let's discuss how my blue/red team expertise can protect your organization. I respond within 24 hours and am available for remote work or relocation.</p>
+        <div class="contact-items">
+          <a href="mailto:AhmedShOwaid@outlook.com" class="contact-item">
+            <div class="ci-icon">✉</div>
+            <div><div class="ci-lbl">Email</div><div class="ci-val">AhmedShOwaid@outlook.com</div></div>
+          </a>
+          <a href="tel:01142843709" class="contact-item">
+            <div class="ci-icon">📞</div>
+            <div><div class="ci-lbl">Phone</div><div class="ci-val">01142843709</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/ahmedshowaid" target="_blank" class="contact-item">
+            <div class="ci-icon">🔗</div>
+            <div><div class="ci-lbl">LinkedIn</div><div class="ci-val">linkedin.com/in/ahmedshowaid</div></div>
+          </a>
+          <div class="contact-item" style="cursor:default;">
+            <div class="ci-icon">📍</div>
+            <div><div class="ci-lbl">Location</div><div class="ci-val">Cairo, Egypt · Remote / Relocation Available</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════
+           CONTACT FORM — EmailJS
+           ═══════════════════════════
+           SETUP (3 minutes):
+           1. Go to https://emailjs.com → Sign up free
+           2. Add Service → choose Outlook → connect AhmedShOwaid@outlook.com
+              → copy the SERVICE ID
+           3. Email Templates → Create Template → use these variables in body:
+                From: {{from_name}}  ({{from_email}})
+                Message: {{message}}
+              → copy the TEMPLATE ID
+           4. Account → copy your PUBLIC KEY
+           5. Paste the 3 values into the constants below
+      ═══════════════════════════ -->
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-lbl">Your Name</label>
+          <input type="text" id="fname" class="form-inp" placeholder="John Doe">
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Your Email</label>
+          <input type="email" id="femail" class="form-inp" placeholder="john@company.com">
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Message</label>
+          <textarea id="fmsg" class="form-ta" placeholder="Tell me about your project or inquiry..."></textarea>
+        </div>
+        <button class="btn btn-primary" id="sendBtn" onclick="sendMsg()" style="align-self:flex-start;">
+          <span id="sendBtnTxt">⚡ Send Message</span>
+        </button>
+        <div class="form-status" id="formStatus"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-text">© 2026 <span>Ahmed Shaban Owaid</span> · Cybersecurity Professional · Beni-Suef, Egypt</div>
+</footer>
+
+<!-- ══════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════ -->
+<script>
+/* ─── EMAILJS CONFIGURATION ──────────────────────────────────
+   Paste your 3 values here after setting up at emailjs.com     */
+const EJS_SERVICE_ID  = 'service_hhfxgbk';  
+const EJS_TEMPLATE_ID = 'template_fphmhvn'; 
+const EJS_PUBLIC_KEY  = 'uD_lmu9XWOSWW7dTh';   
+/* ─────────────────────────────────────────────────────────── */
+
+// Init EmailJS
+emailjs.init(EJS_PUBLIC_KEY);
+
+/* ─── MATRIX BACKGROUND ─── */
+const cv = document.getElementById('matrix-bg'), cx = cv.getContext('2d');
+let cols, drops;
+function initMx() {
+  cv.width = window.innerWidth; cv.height = window.innerHeight;
+  cols = Math.floor(cv.width / 20); drops = Array(cols).fill(1);
+}
+function drawMx() {
+  cx.fillStyle = 'rgba(5,10,15,0.05)'; cx.fillRect(0, 0, cv.width, cv.height);
+  cx.fillStyle = '#00e5ff'; cx.font = '13px Share Tech Mono';
+  for (let i = 0; i < drops.length; i++) {
+    cx.fillText(String.fromCharCode(0x30A0 + Math.floor(Math.random() * 96)), i * 20, drops[i] * 20);
+    if (drops[i] * 20 > cv.height && Math.random() > .975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+initMx(); setInterval(drawMx, 60); window.addEventListener('resize', initMx);
+
+/* ─── NAV ─── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').style.background = window.scrollY > 20 ? 'rgba(5,10,15,.98)' : 'rgba(5,10,15,.93)';
+  let cur = '';
+  document.querySelectorAll('section[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+});
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+/* ─── SERVICE CARD EXPAND (FIXED) ─── */
+function toggleSvc(btn) {
+  // Stop the click bubbling so card hover doesn't interfere
+  event.stopPropagation();
+  const card   = btn.closest('.service-card');
+  const isOpen = card.classList.contains('open');
+  // Close all cards first
+  document.querySelectorAll('.service-card').forEach(c => {
+    c.classList.remove('open');
+    const t = c.querySelector('.btn-txt');
+    if (t) t.textContent = 'EXPAND';
+  });
+  // If this card was closed, open it
+  if (!isOpen) {
+    card.classList.add('open');
+    btn.querySelector('.btn-txt').textContent = 'COLLAPSE';
+  }
+}
+
+/* ─── CONTACT FORM — sends to Outlook via EmailJS ─── */
+async function sendMsg() {
+  const name   = document.getElementById('fname').value.trim();
+  const email  = document.getElementById('femail').value.trim();
+  const msg    = document.getElementById('fmsg').value.trim();
+  const status = document.getElementById('formStatus');
+  const btn    = document.getElementById('sendBtn');
+  const txt    = document.getElementById('sendBtnTxt');
+
+  // Clear previous status
+  status.className = 'form-status';
+  status.textContent = '';
+
+  // Validation
+  if (!name || !email || !msg) {
+    status.className = 'form-status error';
+    status.textContent = '⚠ Please fill in all three fields.';
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    status.className = 'form-status error';
+    status.textContent = '⚠ Please enter a valid email address.';
+    return;
+  }
+
+  // Loading
+  btn.disabled = true;
+  txt.textContent = '⏳ Sending...';
+
+  try {
+    // Send via EmailJS — arrives directly in AhmedShOwaid@outlook.com
+    await emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_ID, {
+      from_name:  name,
+      from_email: email,
+      message:    msg,
+      to_name:    'Ahmed Shaban Owaid'
+    });
+
+    // Success
+    status.className = 'form-status success';
+    status.textContent = '✓ Message sent successfully! Ahmed will reply within 24 hours.';
+    txt.textContent = '✓ Sent!';
+    btn.style.background = 'var(--green)';
+    btn.style.color = '#000';
+    document.getElementById('fname').value  = '';
+    document.getElementById('femail').value = '';
+    document.getElementById('fmsg').value   = '';
+
+    setTimeout(() => {
+      txt.textContent = '⚡ Send Message';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.disabled = false;
+    }, 4000);
+
+  } catch (err) {
+    // EmailJS not configured yet → fall back to mailto
+    const sub  = encodeURIComponent('Portfolio Inquiry from ' + name);
+    const body = encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + msg);
+    window.open('mailto:AhmedShOwaid@outlook.com?subject=' + sub + '&body=' + body);
+
+    status.className = 'form-status info';
+    status.textContent = '📧 Opened Outlook as fallback. To enable direct sending, configure your EmailJS keys in the code.';
+    txt.textContent = '⚡ Send Message';
+    btn.disabled = false;
+  }
+}
+
+/* ─── SCROLL REVEAL ─── */
+const revTargets = document.querySelectorAll(
+  '.service-card,.skill-card,.tl-card,.project-card,.cert-card,.edu-card,.about-bio,.totals-bar'
+);
+revTargets.forEach((el, i) => {
+  el.style.opacity   = '0';
+  el.style.transform = 'translateY(22px)';
+  el.style.transition = `opacity .55s ease ${i % 4 * .07}s, transform .55s ease ${i % 4 * .07}s`;
+});
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity   = '1';
+      e.target.style.transform = 'translateY(0)';
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07, rootMargin: '0px 0px -20px 0px' });
+revTargets.forEach(el => revObs.observe(el));
+// Failsafe — everything visible after 1.5s regardless
+setTimeout(() => revTargets.forEach(el => {
+  el.style.opacity = '1'; el.style.transform = 'translateY(0)';
+}), 1500);
+</script>
+</body>
+</html>
